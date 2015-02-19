@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 current_index=`pacmd list-sinks|grep '* index:'|egrep -o '[0-9]+'`
 max_index=`pacmd list-sinks|grep index:|tail -n1|egrep -o '[0-9]+'`
 if [ $current_index == $max_index ]
@@ -7,7 +7,6 @@ then
 else
   current_index=$(( $current_index + 1 ))
 fi
-echo $current_index
 pacmd set-default-sink $current_index
 
 notify-send -u critical "Switched Sound" "`pacmd list-sinks | grep '* index' -A100 |grep device.profile.description|head -n1|egrep '\".*\"' -o`"
