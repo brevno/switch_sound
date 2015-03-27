@@ -7,8 +7,9 @@ then
 else
   current_index=$(( $current_index + 1 ))
 fi
+
 pacmd set-default-sink $current_index
-for x in `pacmd list-sink-inputs|grep index|egrep -o `; do 
+for x in `pacmd list-sink-inputs|grep index|egrep -o '[0-9]+'`; do 
   pacmd move-sink-input $x $current_index; 
 done
 
